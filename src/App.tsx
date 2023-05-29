@@ -3,6 +3,7 @@ import {
   ButtonGroup,
   Grid,
   GridItem,
+  HStack,
   Show,
   useAccordion,
 } from "@chakra-ui/react";
@@ -13,6 +14,7 @@ import { useState } from "react";
 import { Genre } from "./hooks/useGenres";
 import PlatformSelector from "./components/PlatformSelector";
 import { Platform } from "./hooks/useGames";
+import SortSelector from "./components/SortSelector";
 
 // refactor to use the query object pattern -- as passing all of these variables around is ugly.
 export interface GameQuery {
@@ -48,10 +50,13 @@ function App() {
       </Show>
 
       <GridItem area="main">
-        <PlatformSelector
-          selectedPlatform={gameQuery.platform}
-          onSelectPlatform={(platform) => setGameQuery({...gameQuery, platform})}
-        />
+        <HStack spacing={5} paddingLeft={2} marginBottom={5}>
+          <PlatformSelector
+            selectedPlatform={gameQuery.platform}
+            onSelectPlatform={(platform) => setGameQuery({...gameQuery, platform})}
+          />
+          <SortSelector />
+        </HStack>
         <GameGrid
           gameQuery={gameQuery}
         />
